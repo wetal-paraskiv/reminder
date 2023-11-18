@@ -1,0 +1,42 @@
+{% extends "core/base.html" %} {% block content %}
+
+<div class="container mt-1">
+    <div>
+        <h4 class="text-center">Hello <strong id='user'>{{ user.username }}</strong>.  Your active Reminders:</h4>
+    </div>
+    {% for item in active_reminders %}
+
+    <div class="container mx-auto m-1 border">
+        <a href="{% url 'core:update' item.pk %}">
+            <div class="row upcoming p-2" data-id="{{item.id}}">
+                <div class="reminder-text col-sm">
+                    {{ item.text }}
+                </div>
+                {% if item.repeat|add:"0" > 86400 %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        every: {% widthratio item.repeat 86400 1 %} day(s)
+                    </div>
+                {% elif item.repeat|add:"0" >= 3600 %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        every: {% widthratio item.repeat 3600 1 %} hour(s)
+                    </div>
+                {% elif item.repeat|add:"0" >= 600 %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        every: {% widthratio item.repeat 60 1 %} minute(s)
+                    </div>
+                {% else %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        one time alarm
+                    </div>
+                {% endif %}
+                <div class="reminder-text reminder-alarm col-sm-3">
+                    started: {{ item.date|date:'d M' }}, {{ item.date|date:'H:i' }}
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock content %}

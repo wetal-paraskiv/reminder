@@ -1,0 +1,17 @@
+{% extends "core/base.html" %} {% load static %} {% block content %}
+
+<div class="container">
+    <div class="">
+        <h4 class="text-center">Hello <strong id='user'>{{ user.username }}</strong>,</h4>
+    </div>
+    <div class="text-center create neg-top-margin">
+        <a class="nav-link reminder-alarm reminder-text" href="{% url 'core:create' %}">
+            new reminder <img src="{% static './core/media/Create.png' %}" alt="New">
+        </a>
+    </div>
+    <div id="home-pic" class="">
+        <img src="{% static './core/media/unmoglich.jpg' %}" alt="unmoglich sightsee">
+    </div>
+    
+</div>
+{% endblock content %}

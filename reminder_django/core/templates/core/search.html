@@ -1,0 +1,52 @@
+{% extends "core/base.html" %} {% load static %} {% block content %}
+<div class="container mt-3">
+    <div class="container">
+        <h4 class="text-center">Search in active Reminders</h4>
+
+        <form class="d-flex m-lg-auto" action="{% url 'core:search' %}" method="GET">
+            <input class="form-control-md rounded" type="search" name='q' placeholder="فیلتر توسط محتوا" aria-label="Search">
+            <button class="btn btn-outline-secondary btn-sm ms-2" type="submit">
+                φίλτρο
+            </button>
+        </form>
+    </div>
+
+    {% for item in object_list %}
+
+    <div class="container mx-auto m-1 border update">
+        <a href="{% url 'core:update' item.pk %}">
+            <div class="row search p-2" data-id="{{item.id}}">
+                <div class="reminder-text col-sm">
+                    {{ item.text }}
+                </div>
+                {% if item.repeat|add:"0" > 86400 %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        every: {% widthratio item.repeat 86400 1 %} day(s)
+                    </div>
+                {% elif item.repeat|add:"0" >= 3600 %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        every: {% widthratio item.repeat 3600 1 %} hour(s)
+                    </div>
+                {% elif item.repeat|add:"0" >= 600 %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        every: {% widthratio item.repeat 60 1 %} minute(s)
+                    </div>
+                {% else %}
+                    <div class="reminder-alarm col-sm-3 me-1">
+                        one time alarm
+                    </div>
+                {% endif %}
+                <div class="reminder-text reminder-alarm col-sm-3">
+                    started: {{ item.date|date:'d M' }}, {{ item.date|date:'H:i' }}
+                </div>
+                {% comment %} <div class="reminder-alarm col-sm-1">
+                    {{ item.active|yesno:'active, Bin' }}
+                </div> {% endcomment %}
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock content %}

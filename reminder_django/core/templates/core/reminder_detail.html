@@ -1,0 +1,24 @@
+{% extends "core/base.html" %} {% block content %}
+<div class="container mt-3">
+    <div>
+        <h4 class="text-center">Reminder details</h4>
+    </div>
+
+    <div class="container mx-auto m-1 border">
+        <a href="{% url 'core:update' object.pk %}">
+            <div class="row upcoming p-2" data-id="{{object.id}}">
+                <div class="reminder-text col-sm">
+                    {{ object.text }}
+                </div>
+                <div class="reminder-text reminder-alarm col-sm-4">
+                    started on: {{ object.date|date:'d M Y H:i:s' }}
+                </div>
+                <div class="reminder-alarm col-sm-3 me-1">
+                    repeat every: {{ object.repeat }} seconds
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>
+{% endblock content %}

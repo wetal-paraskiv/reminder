@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTEST html>
+  <html>
+    <head>
+      <title>Hey YOU, out there, in the NET</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="author" content="Paraschiv Vitalie">
+      <meta name="keywords" content="wetalik">
+      <meta name="description" content="wetalik's first web page">
+      <!-- <meta http-equiv="refresh" content="30"> -->
+      <link rel="shortcut icon" href="https://atom.io/favicon.ico"/>
+      <link rel="stylesheet" href="{% static 'core\css\firststyle.css' %}" type="text/css"/>
+      <script src="{% static 'core\js\myFirstScript.js' %}"></script>
+    </head>
+    <body>
+      <h1>&#128511; WETAL's first website &#128512 &#128058; &#128062; WETAL - METAL ⚖</h1>
+      <!-- <p id="special"> The <abbr title="Vitalie Ion Paraschiv">VIP</abbr></p> -->
+      <h4>
+        PINKFLOYD, Dire Straits, Bach, Mozart, Chopin, Beethoven, Vivaldi, Grieg, Schumman, Schubert, Verdi, Rossini, Ravel, Smetana,
+        Tchaikovski, Prokofiev, Schostakovich, Albinone, Paganini, Satie, Debussy, Strauss, Purcell, Brahms, Rachmaninov,Dvorak, Khachaturean
+      </h4>
+    <img style="width:100px"src="https://torrindex.net/images/tpb.jpg"><br>
+    <div onclick="bigText()" id="divpoem"><pre>
+      Hey you, out there in the cold
+      Getting lonely, getting old
+      Can you feel me?
+      Hey you, standing in the aisles
+      With itchy feet and fading smiles
+      Can you feel me?
+      Hey you, don't help them to bury the light
+      Don't give in without a fight....
+    </pre></div>
+
+   <audio controls>
+   <source src="{% static 'core\media\Ray Manzarek & Roy Rogers - _ Ballads Before The Rain.mp3' %}" type="audio/mpeg">
+   Your browser does not support the audio element.
+   </audio><br>
+    <a href="https://www.w3schools.com/">
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com" style="width:100px;height:100px;vertical-align:bottom;"></a><br>
+
+    <h5 style="color:red">WETAL's first h5 Ray Manzarek & Roy Rogers - Ballads Before The Rain </h5>
+    <h6> and the first WETAL's h6 </h6>
+
+    <!-- <p id="myP">Hello World!</p> -->
+    <button onclick="displayResult()" id="myP">Click to<sub>(see what happends)</sub></button>
+
+    <p class="intro"><b>Un text oarecare de proba tip bold (BOLD)</b><br><em>si la fel text dar din rind nou si 'italic' (V ITALIK)</em></p>
+    <p id="special"><abbr title="Vitalie Ion Paraschiv">VIP</abbr></p>
+    <a href="https://www.youtube.com/watch?v=zrz8NuALuj8"target="_blank"style="text-decoration:none">
+      PINK FLOYD "Marooned" </a><br>
+    <a href="https://www.youtube.com/watch?v=ZPdk5GaIDjo"target="_blank">ANTONIO VIVALDI (рыжый священник)</a><br>
+    <a href="https://translate.google.com/" target="_blank">Google Translator</a>
+
+          <table style="border:1px solid black">
+          <caption>Tabel de Studium</caption>
+            <thead>
+              <tr>
+                <th>Denumire</th>
+                <th>Termen</th>
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                  <td>Python</td>
+                  <td>3 luni</td>
+                </tr>
+                <tr>
+                  <td>HTML</td>
+                  <td>2 luni</td>
+                </tr>
+                <tr>
+                  <td>CSS</td>
+                  <td>2 luni</td>
+                </tr>
+                <tr>
+                  <td>SQL</td>
+                  <td>2 luni</td>
+                </tr>
+                <tr>
+                  <td>JAVASCRIPT</td>
+                  <td>3 luni</td>
+                </tr>
+              </tbody>
+            </table><br><br><br>
+
+        <!-- <img src="moldau.jpg" alt="Moldau" width="600"> -->
+        <div>
+          <img id="Romania" src="nature2.jpg" alt="Romania" onmouseover="bigPicture()"
+          onmouseout="smallPicture()">
+        </div>
+
+  </body>
+</html>
+

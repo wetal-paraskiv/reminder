@@ -1,0 +1,25 @@
+{% extends "core/base.html" %} {% block content %}
+<div class="container mt-1">
+    <div class="container">
+        <h4 class="text-center">RecycleBin</h4>
+        <p class="text-center text-muted">click on text to edit and reuse it or: delete it 'daca nu mai poti'</p>
+    </div>
+    {% for item in bin_reminders %}
+
+    <div class="container mx-auto m-1 border update">
+        <a href="{% url 'core:update' item.pk %}">
+            <div class="d-flex bd-highlight" data-id="{{item.id}}">
+                <div class="reminder-text p-2 flex-grow-1 bd-highlight">
+                    {{ item.text }}
+                </div>
+                <div class="p-2 bd-highlight">
+                    <a href="{% url 'core:delete' item.pk %}" class="btn btn-outline-danger">del</a>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock content %}

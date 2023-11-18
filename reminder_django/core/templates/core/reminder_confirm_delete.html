@@ -1,0 +1,23 @@
+{% extends "core/base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="container mt-3">
+
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-grup">
+            <legend class="border-bottom mb-4 text-center">Delete reminder</legend>
+            <div class='m-2'>
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+            </div>
+        </fieldset>
+        <div class="row m-4 mx-auto">
+            <div class="d-grid gap-2 col-5 mx-auto">
+            <a href="{% url 'core:recycle_bin' %}" class="btn btn-outline-primary">Cancel</a>
+            </div>
+            <div class="d-grid gap-2 col-5 mx-auto">
+                <button class="btn btn-outline-danger" type="submit">Confirm</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock content %}

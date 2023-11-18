@@ -1,0 +1,46 @@
+mkdir folderName
+cd folderName
+python -m venv envName
+envName\scripts\activate
+
+pip install django
+pip install djangorestframework
+python -m django --version
+pip install Django --upgrade
+
+django-admin (list of subcommands)
+django-admin startproject projectName
+
+python manage.py runserver
+python manage.py startapp appName 
+python manage.py migrate
+python manage.py check
+python manage.py makemigrations appName
+python manage.py migrate (yes, the second time - saving the changes to database)
+python manage.py createsuperuser
+python manage.py createsuperuser --email admin@example.com --username admin
+
+pip install pipenv
+pipenv install envName
+pipenv shell # activate project's virtualenv
+pipenv run envName startproject projectName
+
+pip list / pip list --local / pip freeze 
+pip install virtualenv (installing module venv)
+python -m venv envName --system-site-packages (to install all packages)
+py -3 --version
+
+python -m pip freeze > requirements.txt
+pip install -r requirements.txt
+
+	storing SECRET_KEY in .env file
+pip install python-decouple
+create .env (where manage.py)
+copy SECRET_KEY from your settings.py to .env
+add to settings.py:
+from decouple import config
+SECRET_KEY = config('SECRET_KEY')
+
+
+https://codewithsteps.herokuapp.com/
+	

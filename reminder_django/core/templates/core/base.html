@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReminderApp</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core\css\style.css' %}">
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+    </script>
+</head>
+
+<body>
+    <audio src="/media/you-have-new-message-484.mp3" id="soundToPlay" controls style="display: none;"></audio>
+
+    <div class="container main-container mx-auto border">
+
+        <nav class="navbar navbar-expand-md navbar-light py-0" style="background-color: #e3f2fd;">
+            <div class="container-fluid">
+
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav mx-auto navbar-icons d-flex flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link mx-auto" aria-current="page" href="{% url 'core:home' %}">
+                            <img src="{% static './core/media/Active_Reminders.png' %}" alt="active">
+                        </a>
+                    </li>
+                    <li class="nav-item mx-auto">
+                        <a class="nav-link" href="{% url 'core:recycle_bin' %}">
+                            <img src="{% static './core/media/Bin.png' %}" alt="Bin">
+                        </a>
+                    </li>
+                    <li class="navbar-brand mx-auto">
+                        <a class="nav-link" href="{% url 'core:search' %}">
+                            <img src="{% static './core/media/Search.png' %}" alt="find">
+                        </a>
+                    </li>
+                </ul>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="mx-auto">
+                    <div class="collapse navbar-collapse" id="navbarToggler">
+                        <ul class="navbar-nav mb-2 mb-lg-0 reminder-text flex-row d-md-flex bd-highlight">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'core:about' %}">
+                                    <img src="{% static './core/media/About.png' %}" alt="about">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'profile' %}">
+                                    <img src="{% static './core/media/Profile.png' %}" alt="profile">
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">
+                                    <img src="{% static './core/media/art-logout.png' %}" alt="logout">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {% else %}
+                <a class="navbar-brand mx-auto" href="{% url 'core:python' %}">
+                    <img src="{% static './core/media/python.png' %}" style="width:35%; heigth:35%;" alt="PythonLogo" id="python-logo">
+                    <strong class="text-danger ms-3">Reminder</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler2" aria-controls="navbarToggler2" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarToggler2">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 reminder-text flex-row d-md-flex">
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="{% url 'core:about' %}">
+                                <img src="{% static './core/media/About.png' %}" alt="About">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="{% url 'login' %}">
+                                <img src="{% static './core/media/Log_In.png' %}" alt="Login">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link" href="{% url 'register' %}">
+                                <img src="{% static './core/media/Register.png' %}" alt="Register">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class="container mt-2">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} py-1 px-auto">
+                last message: {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mx-auto content">
+            {% block content %} {% endblock content %}
+        </div>
+
+        <div class="footer text-muted mt-2">
+            <p class="text-center">Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
+                <a href="{% url 'core:wetals' %}" target="_blank">wetal'ik's</a>
+                <br>Speech using <a href="https://responsivevoice.org/" target="_blank">ResponsiveVoice.</a> Icons by Paula Paraschiv. <a href="#">Netherlands Rotterdam Moldova Chisinau</a>
+            </p>
+
+        </div>
+    </div>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=pBBus7GE"></script>
+</body>
+
+
+</html>
