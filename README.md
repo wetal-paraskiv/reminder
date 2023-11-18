@@ -1,3 +1,3 @@
 # reminder
-python Dhango framework 'reminder' application
+python Django framework 'reminder' application
 
